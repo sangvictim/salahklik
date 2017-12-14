@@ -67,10 +67,9 @@
               <div class="menu_section">
                 <h3>Administrator</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-linux"></i> Kategori <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-linux"></i> Menu <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?= base_url('admin/kategori.html') ?>">Kategori</a></li>
-                      <li><a href="<?= base_url('admin/sub_kategori.html') ?>">Sub Kategori</a></li>
+                      <li><a href="<?= base_url('admin/menu.html') ?>">Menu</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-apple"></i> Admin <span class="fa fa-chevron-down"></span></a>
