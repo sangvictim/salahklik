@@ -7,12 +7,14 @@
         	<hr>
         </div>
         <div class="row">
-        	<img src="<?= base_url(substr($konten->gambar, 1))  ?>">
+        	<img src="<?= base_url(substr($konten->gambar, 1))  ?>" style="width: 100%">
         </div>
-        <div class="row">
-        	<p>
-        		<?= $konten->deskripsi ?>
-        	</p>
+        <div class="row ">
+        	<div class="pull-left">
+                <p>
+                    <?= $konten->deskripsi ?>
+                </p>
+            </div>
         </div>
         <div class="row">
         	<div class="pull-left">

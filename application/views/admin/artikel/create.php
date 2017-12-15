@@ -33,8 +33,8 @@
           <div class="col-md-12 col-sm-6 col-xs-12">
             <select name="sub_kategori" required="required" class="form-control select2">
               <option value="">-- Pilih Kategori --</option>
-              <?php foreach ($sub_kategori as $sk): ?>
-                <option value="<?= $sk->id ?>"><?= $sk->nama_sub_kategori ?></option>
+              <?php foreach ($menu as $sk): ?>
+                <option value="<?= $sk->id ?>"><?= $sk->nama_menu ?></option>
               <?php endforeach ?>
             </select>
           </div>

@@ -3,7 +3,7 @@
     <div class="col-md-6">
     	<div class="x_panel">
       <div class="x_title">
-        <h2>Form Add Admin</h2>
+        <h2>Form Edit Menu</h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -23,13 +23,13 @@
       </div>
       <div class="x_content">
 	    <br />
-	    <form action="<?= base_url('admin/kategori/update/'.$edit_kategori->id) ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+	    <form action="<?= base_url('admin/menu/update/'.$edit_menu->id) ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
 	      <div class="form-group">
 	        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Kategori
 	        </label>
 	        <div class="col-md-6 col-sm-6 col-xs-12">
-	          <input type="text" name="nama_kategori" value="<?= $edit_kategori->nama_kategori ?>" required="required" autofocus class="form-control col-md-7 col-xs-12">
+	          <input type="text" name="nama_menu" value="<?= $edit_menu->nama_menu ?>" required="required" autofocus class="form-control col-md-7 col-xs-12">
 	        </div>
 	      </div>
 	      <div class="ln_solid"></div>
@@ -46,7 +46,7 @@
     <div class="col-md-6">
     	<div class="x_panel">
       <div class="x_title">
-        <h2>Daftar Kategori</h2>
+        <h2>Daftar Menu</h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -75,15 +75,15 @@
             </tr>
           </thead>
           <tbody>
-            <?php $no=1; foreach ($kategori as $kt): ?>
+            <?php $no=1; foreach ($menu as $kt): ?>
             	<tr>
                <td><?= $no ?></td>
-              <td><?= $kt->nama_kategori ?></td>
+              <td><?= $kt->nama_menu ?></td>
               <td>
-                <a href="<?= base_url('admin/kategori/edit/'.$kt->id.'.html') ?>" class="btn btn-info btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                <a href="<?= base_url('admin/menu/edit/'.$kt->id.'.html') ?>" class="btn btn-info btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
               </td>
               <td>
-                <a href="<?= base_url('admin/kategori/delete/'.$kt->id) ?>" class="btn btn-danger btn-sm" title="Hapus"><i class="fa fa-trash"></i></a>
+                <a href="<?= base_url('admin/menu/delete/'.$kt->id) ?>" class="btn btn-danger btn-sm" title="Hapus"><i class="fa fa-trash"></i></a>
               </td> 
               </tr>
             <?php $no++; endforeach ?>

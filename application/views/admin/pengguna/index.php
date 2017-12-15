@@ -46,9 +46,11 @@
               <td>
                 <a href="<?= base_url('admin/pengguna/edit/'.$usr->id.'.html') ?>" class="btn btn-info btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
               </td>
-              <td>
+              <?php if ($usr->id != 1): ?>
+                <td>
                 <a href="<?= base_url('admin/pengguna/delete/'.$usr->id) ?>" class="btn btn-danger btn-sm" title="Hapus"><i class="fa fa-trash"></i></a>
               </td>
+              <?php endif ?>
             </tr>
           <?php $no++; endforeach ?>
             

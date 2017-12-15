@@ -7,7 +7,8 @@ class Artikel extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('M_artikel');
-		$this->load->model('M_sub_kategori');
+		$this->load->model('M_pengguna');
+		$this->load->model('M_menu');
 		$this->load->library('upload');
 		$sesi = $this->session->userdata('sesilogin');
 		$getrole = $this->Master->datalogin($sesi);
@@ -21,10 +22,11 @@ class Artikel extends CI_Controller {
 		
 		$sesi = $this->session->userdata('sesilogin');
 		$header = array(
-			'title' => 'Posting Artikel',
+			'title' => 'Daftar Artikel',
 			'nama' => $this->Master->datalogin($sesi),
-			'artikel' => $this->M_artikel->all()
+			'artikel' => $this->M_artikel->get_konten($sesi)
 			);
+
 		$this->load->view('admin/header', $header);
 		$this->load->view('admin/artikel/index', $header);
 		$this->load->view('admin/footer');
@@ -37,8 +39,9 @@ class Artikel extends CI_Controller {
 		$header = array(
 			'title' => 'Posting Artikel',
 			'nama' => $this->Master->datalogin($sesi),
-			'sub_kategori' => $this->M_sub_kategori->all(),
+			'menu' => $this->M_menu->get_menu(),
 			);
+
 		$this->load->view('admin/header', $header);
 		$this->load->view('admin/artikel/create', $header);
 		$this->load->view('admin/footer');
@@ -50,7 +53,7 @@ class Artikel extends CI_Controller {
 		$header = array(
 			'title'        => 'Edit Artikel',
 			'nama'         => $this->Master->datalogin($sesi),
-			'sub_kat'      => $this->M_sub_kategori->all(),
+			'sub_kat'      => $this->M_menu->get_menu(),
 			'edit_artikel' => $this->M_artikel->find($id),
 			);
 		$this->load->view('admin/header', $header);
@@ -78,6 +81,8 @@ class Artikel extends CI_Controller {
 
 	public function update($id)
 	{
+		$data_session = $this->session->userdata('sesilogin');
+		$penulis   = $data_session['id'];
 		$type = explode('.', $_FILES['gambar']['name']);
         $type = $type[count($type) -1];
         $url = "./assets/upload/"."salah_klik_".uniqid(rand()).'.'.$type;
@@ -90,7 +95,7 @@ class Artikel extends CI_Controller {
 						'permalink'    => str_replace(' ', '-', $this->input->post('judul')),
 						'sub_kategori' => $this->input->post('sub_kategori'),
 						'deskripsi'    => $this->input->post('deskripsi'),
-						'penulis'      => $id,
+						'penulis'      => $penulis,
 						'gambar' => $url
 						);
 					$this->M_artikel->update($data, $id);
@@ -103,7 +108,7 @@ class Artikel extends CI_Controller {
 						'permalink'    => str_replace(' ', '-', $this->input->post('judul')),
 						'sub_kategori' => $this->input->post('sub_kategori'),
 						'deskripsi'    => $this->input->post('deskripsi'),
-						'penulis'      => $id
+						'penulis'      => $penulis
 						);
 					$this->M_artikel->update($data, $id);
 					$this->session->set_flashdata('sip', 'data berhasil disimpan!');

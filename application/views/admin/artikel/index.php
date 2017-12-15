@@ -48,8 +48,8 @@
             	<tr>
             		<td><?= $no ?></td>
                 <td><?= $art->judul ?></td>
-                <td><?= $art->sub_kategori ?></td>
-                <td><?= $art->deskripsi ?></td>
+                <td><?= $art->nama_menu ?></td>
+                <td><?= substr($art->deskripsi, 0, 50) ?> ....</td>
                 <td><?= $art->penulis ?></td>
               	<td><?= $art->created_at ?></td>
               	<td>

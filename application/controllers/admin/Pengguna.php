@@ -23,7 +23,7 @@ class Pengguna extends CI_Controller {
 					'nama'  => $this->Master->datalogin($sesi),
 				);
 				$data = array(
-					'user' => $this->M_pengguna->all(),
+					'user' => $this->M_pengguna->select('id, nama, alamat, notelp, role, username')->all(),
 					);
 				$this->load->view('admin/header', $header);
 				$this->load->view('admin/pengguna/index', $data);
@@ -114,7 +114,12 @@ class Pengguna extends CI_Controller {
 
 	public function delete($id)
 	{
-		$this->M_pengguna->delete($id);
-		redirect('admin/pengguna', 'refresh');
+		if ($id == 1) {
+			redirect('admin/pengguna', 'refresh');
+		}else{
+			$this->M_pengguna->delete($id);
+			redirect('admin/pengguna', 'refresh');
+		}
+		
 	}
 }

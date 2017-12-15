@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Menu extends CI_Controller {
+class Sub_menu extends CI_Controller {
 
 	function __construct()
 	{
@@ -17,29 +17,13 @@ class Menu extends CI_Controller {
 		}
 	}
 
-	public function index()
-	{
-		
-		$sesi = $this->session->userdata('sesilogin');
-		$header = array(
-			'title' => 'Menu',
-			'nama' => $this->Master->datalogin($sesi),
-			'menu' => $this->M_menu->all(),
-			'parent' => $this->M_menu->where('id_parent', '0')->all()
-			);
-		$this->load->view('admin/header', $header);
-		$this->load->view('admin/menu/index', $header);
-		$this->load->view('admin/footer');
-		
-	}
-
 	public function add()
 	{
 		$data = array(
-			'id_parent'  => '0',
-			'menu_order' => '0',
+			'id_parent'  => $this->input->post('id_parent'),
+			'menu_order' => '1',
 			'nama_menu'  => $this->input->post('nama_menu'),
-			'link'       => ''
+			'link'       => str_replace(' ', '-', $this->input->post('nama_menu'))
 			);
 		$this->M_menu->insert($data);
 		redirect('admin/menu', 'refresh');
@@ -52,23 +36,12 @@ class Menu extends CI_Controller {
 			'title' => 'Edit Menu',
 			'nama' => $this->Master->datalogin($sesi),
 			'menu' => $this->M_menu->all(),
+			'parent' => $this->M_menu->where('id_parent', '0')->all(),
 			'edit_menu' => $this->M_menu->find($id),
 			);
 		$this->load->view('admin/header', $header);
-		$this->load->view('admin/menu/edit', $header);
+		$this->load->view('admin/menu/edit_sub', $header);
 		$this->load->view('admin/footer');
 	}
 
-	public function update($id)
-	{
-		$data = $this->input->post();
-		$this->M_menu->update($data, $id);
-		redirect('admin/menu', 'refresh');
-	}
-
-	public function delete($id)
-	{
-		$this->M_menu->delete($id);
-		redirect('admin/menu', 'refresh');
-	}
 }

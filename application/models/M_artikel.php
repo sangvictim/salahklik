@@ -24,4 +24,17 @@ class M_artikel extends MY_Model {
 		return $this->db->get('konten as k')->row();
 	}
 
+	public function get_konten($sesi)
+	{
+		$this->db->select('k.id, k.judul, k.permalink, k.deskripsi, k.created_at,mn.nama_menu, usr.nama  as penulis');
+		$this->db->join('user as usr', 'usr.id = k.penulis');
+		$this->db->join('menu as mn', 'mn.id = k.sub_kategori');
+		if ($sesi != 1) {
+			$this->db->where('penulis', $sesi);
+		}
+		return $this->db->get('konten as k')->result();
+	}
+
+	
+
 }

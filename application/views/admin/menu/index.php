@@ -23,13 +23,13 @@
       </div>
       <div class="x_content">
 	    <br />
-	    <form action="<?= base_url('admin/kategori/add') ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+	    <form action="<?= base_url('admin/menu/add') ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
 	      <div class="form-group">
-	        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Menu
+	        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Master Menu
 	        </label>
-	        <div class="col-md-6 col-sm-6 col-xs-12">
-	          <input type="text" name="nama_kategori" required="required" autofocus class="form-control col-md-7 col-xs-12" placeholder="Menu Master">
+	        <div class="col-md-8 col-sm-6 col-xs-12">
+	          <input type="text" name="nama_menu" required="required" autofocus class="form-control col-md-7 col-xs-12" placeholder="Menu Master">
 	        </div>
 	      </div>
 	      <div class="ln_solid"></div>
@@ -64,13 +64,24 @@
       </div>
       <div class="x_content">
       <br />
-      <form action="<?= base_url('admin/kategori/add') ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
-
+      <form action="<?= base_url('admin/sub_menu/add') ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sub Menu
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Master Menu
           </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" name="nama_kategori" required="required" autofocus class="form-control col-md-7 col-xs-12" placeholder="Sub Menu">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <select class="form-control select2" name="id_parent" required>
+              <option value="">-- Pilih Master Menu --</option>
+              <?php foreach ($parent as $pr): ?>
+                <option value="<?= $pr->id ?>"><?= $pr->nama_menu?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sub Menu
+          </label>
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <input type="text" name="nama_menu" required="required" autofocus class="form-control col-md-7 col-xs-12" placeholder="Sub Menu">
           </div>
         </div>
         <div class="ln_solid"></div>
@@ -120,11 +131,17 @@
             	<tr>
             		<td><?= $no ?></td>
             	<td><?= $mn->nama_menu ?></td>
-            	<td>
-                <a href="<?= base_url('admin/kategori/edit/'.$mn->id.'.html') ?>" class="btn btn-info btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-              </td>
+            	<?php if ($mn->id_parent == 0){ ?>
+                <td>
+                  <a href="<?= base_url('admin/menu/edit/'.$mn->id.'.html') ?>" class="btn btn-info btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                </td>
+              <?php }else{ ?>
+                <td>
+                  <a href="<?= base_url('admin/sub_menu/edit/'.$mn->id.'.html') ?>" class="btn btn-info btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                </td>
+              <?php } ?>
               <td>
-                <a href="<?= base_url('admin/kategori/delete/'.$mn->id) ?>" class="btn btn-danger btn-sm" title="Hapus"><i class="fa fa-trash"></i></a>
+                <a href="<?= base_url('admin/menu/delete/'.$mn->id) ?>" class="btn btn-danger btn-sm" title="Hapus"><i class="fa fa-trash"></i></a>
               </td>
             	</tr>
             <?php $no++; endforeach ?>

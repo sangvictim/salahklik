@@ -34,7 +34,7 @@
             <select name="sub_kategori" required="required" class="form-control select2">
               <option value="">-- Pilih Kategori --</option>
               <?php foreach ($sub_kat as $sk): ?>
-                <option value="<?= $sk->id ?>" <?= $sk->id == $edit_artikel->sub_kategori ? 'selected' : '' ?> ><?= $sk->nama_sub_kategori ?></option>
+                <option value="<?= $sk->id ?>" <?= $sk->id == $edit_artikel->sub_kategori ? 'selected' : '' ?> ><?= $sk->nama_menu ?></option>
               <?php endforeach ?>
             </select>
           </div>
